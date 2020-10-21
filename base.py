@@ -24,7 +24,7 @@ class Context:
     hostname: str
 
 
-def db():
+def db() -> Database:
     namespace = os.environ.get("APP_NAME")
     return Database(
         host=secret("wov-db-host"),
