@@ -19,10 +19,13 @@ def hasura(body: dict, key: str) -> str:
 
 def configure_sentry(body: dict, **tags) -> None:
     """
-    Configure sentry, setting the action name
+    Configure sentry, setting the action name, user_id, and user role
     """
     tags["app.action"] = body.get("action", {}).get("name")
-    sentry.configure(body, **tags)
+    user_id = hasura(body, "user-id")
+    role = hasura(body, "role")
+
+    sentry.configure(user_id, role, **tags)
 
 
 def error(message: str, code: int = 400) -> dict:
