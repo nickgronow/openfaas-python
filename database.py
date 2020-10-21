@@ -17,7 +17,7 @@ class Database:
 
     def query(self, sql: str, *params) -> psycopg2.cursor:
         """
-        Run an sql query
+        Run an sql query, returning the cursor.
         """
         self.cursor.execute(sql, params)
         return self.cursor
