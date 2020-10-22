@@ -22,9 +22,9 @@ class Database:
         self.cursor.execute(sql, params)
         return self.cursor
 
-    def first(self, sql: str, *params) -> []:
+    def first(self, sql: str, *params) -> dict:
         """
-        Run an sql query, returning the first row.
+        Run an sql query, returning a dict of the first row.
         """
         return self.query(sql, *params).fetchone()
 
@@ -35,9 +35,9 @@ class Database:
         """
         return self.query(sql, *params).fetchall()
 
-    def find(self, table: str, **where) -> []:
+    def find(self, table: str, **where) -> dict:
         """
-        Run an sql query, returning a tuple of the matched row.
+        Run an sql query, returning a dict of the matched row.
         """
         statement = "SELECT * FROM {0} WHERE {1} ORDER BY id DESC LIMIT 1"
         where_clause = " AND ".join([col + " = %s" for col in where])
